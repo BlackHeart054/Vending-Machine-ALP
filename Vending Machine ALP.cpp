@@ -1,10 +1,13 @@
+// Projeto ALP - Vending Machine
+// Se possivel, execute o programa em tela cheia!
 #include <iostream>
 #include <map>
 #include <string>
 #include <vector>
+#include <cstdlib>
 // Declaracao das variaveis que serao utilizadas no projeto, cada uma em um momento especifico
 using namespace std;
-int primeiraEscolha, segundaEscolha, terceiraEscolha, idCategoria, idProduto,  valorProduto, itensCarrinho, opcaoFormaPagamento, opcaoPagamento;
+int primeiraEscolha, segundaEscolha, terceiraEscolha, idCategoria, idProduto, valorProduto, itensCarrinho, opcaoFormaPagamento, opcaoPagamento;
 int quantidadeProduto = 0, valorSubtotal = 0, indiceLista = 0;
 string nomeCategoria, nomeProduto;
 
@@ -458,11 +461,6 @@ void NomesCategoriasProdutos() {
     }
 }
 
-// Essa é uma função curta que provavelmente nem precisaria existir aqui, mas decidimos colocar numa função para não atrapalhar na legibilidade do codigo
-void ValorSubtotalProdutos() {
-    valorSubtotal = valorSubtotal + valorProduto;
-}
-
 // Esse For esta responsavel por quando o usuario adicionar mais itens no carrinho, ele escrever qual produto, categoria, valor e quantidade uma linha após a outra; 
 void ListaSubtotalProdutos() {
     NomesCategoriasProdutos();
@@ -528,11 +526,84 @@ int TelaSubtotal() {
     return 0;
 }
 
+// Tela responsavel por mostrar os itens que podem ser adicionados a maquina de vendas
+void AdicionarProdutosMaquina() {
+    switch (idCategoria) {
+    case 1:
+        cout << " _________________________________________________________________ \n";
+        cout << "|                                                                 |\n";
+        cout << "|                            REFRIGERANTES                        |\n";
+        cout << "|-----------------------------------------------------------------|\n";
+        cout << "| 1 - COCA-COLA           2 - PEPSI          3 - GUARANA ANTARTICA|\n";
+        cout << "| 4 - TUBAINA             5 - FANTA LARANJA  6 - FANTA UVA        |\n";
+        cout << "|-----------------------------------------------------------------|\n";
+        break;
+    case 2:
+        cout << " _________________________________________________________________ \n";
+        cout << "|                                                                 |\n";
+        cout << "|                            DOCES                                |\n";
+        cout << "|-----------------------------------------------------------------|\n";
+        cout << "| 1 - SUFLAIR            2 - BOMBOM         3 - BARRA CEREAL      |\n";
+        cout << "| 4 - SNIKERS            5 - PACOQUITA      6 - SKITTLES          |\n";
+        cout << "|-----------------------------------------------------------------|\n";
+        break;
+    case 3:
+        nomeCategoria = "SALGADINHOS";
+        cout << " _________________________________________________________________ \n";
+        cout << "|                                                                 |\n";
+        cout << "|                            SALGADINHOS                          |\n";
+        cout << "|-----------------------------------------------------------------|\n";
+        cout << "| 1 - CHEETOS            2 - FANDANGOS      3 - DORITOS           |\n";
+        cout << "| 4 - PRINGLES           5 - TORCIDA        6 - YOKITOS           |\n";
+        cout << "|-----------------------------------------------------------------|\n";
+        break;
+    case 4:
+        nomeCategoria = "SUCOS";
+        cout << " _________________________________________________________________ \n";
+        cout << "|                                                                 |\n";
+        cout << "|                            SUCOS                                |\n";
+        cout << "|-----------------------------------------------------------------|\n";
+        cout << "| 1 - LARANJA            2 - UVA            3 - MORANGO           |\n";
+        cout << "| 4 - PESSEGO            5 - GOIABA         6 - ACEROLA           |\n";
+        cout << "|-----------------------------------------------------------------|\n";
+        break;
+    case 5:
+        nomeCategoria = "ALCOOLICOS";
+        cout << " _________________________________________________________________ \n";
+        cout << "|                                                                 |\n";
+        cout << "|                            ALCOOLICOS                           |\n";
+        cout << "|-----------------------------------------------------------------|\n";
+        cout << "| 1 - COROTE             2 - SKOL           3 - BRAHMA            |\n";
+        cout << "| 4 - AMSTEL             5 - HEINEKEN       6 - PETRA             |\n";
+        cout << "|-----------------------------------------------------------------|\n";
+        break;
+    case 6:
+        nomeCategoria = "CHAS";
+        cout << " _________________________________________________________________ \n";
+        cout << "|                                                                 |\n";
+        cout << "|                            CHAS                                 |\n";
+        cout << "|-----------------------------------------------------------------|\n";
+        cout << "| 1 - CIDEIRA            2 - MATE           3 - HIBISCO           |\n";
+        cout << "| 4 - HORTELA            5 - CAMOMILA       6 - BOLDO             |\n";
+        cout << "|-----------------------------------------------------------------|\n";
+        break;
+    };
+}
+
+// Tela onde sera mostrado a quantia a ser adicionada na maquina
+void ConfirmarAdicaoMaquina() {
+    cout << " _________________________________________________________________ \n";
+    cout << "|                                                                 |\n";
+    cout << "|                DESEJA ADICIONAR ESSES ITENS?                    |\n";
+    cout << "|-----------------------------------------------------------------|\n";
+    ListaSubtotalProdutos();
+    cout << "|-----------------------------------------------------------------|\n";
+}
+
 // Esse main ira ser responsavel por absorver os inputs e contar uma historinha para descontrair
 // Esse projeto esta um pouco diferente do pedido, mas resolvemos fazer desse modo para descontrair um pouco
 // Espero que curta e se divirta um pouco! S2
-int main() 
-{
+int main() {
     cout << "\n Voce esta andando pela rua quando derepente sente seu estomago roncar... \n";
     cout << "\n Nisso voce se lembra que nao comeu nada o dia inteiro por falta de tempo \n";
     cout << "\n Entao nesse momento voce percebe uma vending machine perto de voce \n";
@@ -541,8 +612,7 @@ int main()
 
     system("cls");
 
-    if (primeiraEscolha != 2)
-    {
+    if (primeiraEscolha != 2) {
         cout << "\n Ao aproximar-se, voce percebe que a vending machine possui um sistema altamente tecnologico \n \n";
         do {
             TelaCategoria();
@@ -553,45 +623,58 @@ int main()
             cin >> idProduto;
             cout << "\n E obviamente, a quantidade do produto desejado \n";
             cin >> quantidadeProduto;
-            cout << "\n Logo apos, o sistema da vending machine leva a uma tela de subtotal\n ";
-            ValorSubtotalProdutos();
+            cout << "\n Logo apos, o sistema da vending machine leva a uma tela de subtotal \n ";
+            valorSubtotal += valorProduto;
             TelaSubtotal();
             cout << "\n Deseja adicionar mais itens a sacola? (1 - SIM | 2 - NAO) \n";
             cin >> segundaEscolha;
             system("cls");
             indiceLista++;
         } while (segundaEscolha != 2);
+
         system("cls");
-        cout << "\n Na maquina entao aparece a seguinte tela:\n";
+        cout << "\n Na maquina entao aparece a seguinte tela: \n";
         TelaPagamento();
         cin >> opcaoFormaPagamento;
         Pagamento();
-        cout << "\nCompra efetuada com sucesso, aguarde a saida dos itens adquiridos!\n";
-        cout << "\n...\n";
-        cout << "\n'Ufa, ate que enfim' :P \n";
-        cout << "\nEnquanto voce se alimenta do que acabou de comprar, chega um homem de terno na maquina...\n";
-        cout << "\nDeseja se aproximar para ver o que ele esta fazendo?\n";
-        cout << "\n1. 'Sou muito curioso, nao vou resistir' 0_0 \n"
-                "\n2. 'Pra mim ja deu, chega dessa festa. Eu vou embora daqui!' Ò_Ó \n";
+        cout << "\n Compra efetuada com sucesso, aguarde a saida dos itens adquiridos! \n";
+        cout << "\n ...\n";
+        cout << "\n 'Ufa, ate que enfim' :P \n";
+        cout << "\n Enquanto voce se alimenta do que acabou de comprar, chega um homem de terno na maquina... \n";
+        cout << "\n Deseja se aproximar para ver o que ele esta fazendo? \n";
+        cout << "\n 1. 'Sou muito curioso, nao vou resistir' 0_0 \n"
+                "\n 2. 'Pra mim ja deu, chega dessa festa. Eu vou embora daqui!' Ò_Ó \n";
         cin >> terceiraEscolha;
+
         if (terceiraEscolha != 2) {
             system("cls");
-            cout << "\nAo se aproximar, voce percebe que o homem deve ser o proprietario da vending machine\n";
-            cout << "\nEle entao comeca a fazer configuracoes especificas na maquina e desbloqueia uma 'tela secreta'...\n";
+            cout << "\n Ao se aproximar, voce percebe que o homem deve ser o proprietario da vending machine \n";
+            cout << "\n Ele entao comeca a fazer configuracoes especificas na maquina e desbloqueia uma 'tela secreta'... \n";
             TelaAdministrador();
-            cout << "\nLogo apos ele comeca a mecher nela de uma forma bem especifica\n";
-            cout << "\n O homem entao percebe seu interesse e lhe pergunta: 'Gostaria de testa-la meu caro serumaninho?\n";
+            cout << "\n Logo apos ele comeca a mecher nela de uma forma bem especifica \n";
+            cout << "\n O homem entao percebe seu interesse e lhe pergunta: 'Gostaria de testa-la meu caro serumaninho? \n";
             cout << "\n Voce que nao eh bobo nem nada aceita logo de cara. Esse eh o dia mais feliz da sua vida! ^-^ \n";
+            cout << "\n Voce decide entao selectionar uma opcao \n";
+            cin >> idCategoria;
+            cout << "\n Aparece entao a tela de produtos\n";
+            AdicionarProdutosMaquina();
+            cout << "\n Voce decide entao selectionar uma opcao \n";
+            cin >> idProduto;
+            cout << "\n Por fim, chega na tela onde eh possivel adicionar a quantia de itens na maquina \n";
+            cout << "\n Nesse momento entao o homem vira e lhe diz: 'Nao se preocupe, os itens chegarao em breve e serao repostos! \n";
+            cout << "\n Voce decide entao colocar ", cin >> quantidadeProduto;
+            cin >> quantidadeProduto;
+            ConfirmarAdicaoMaquina();
+            
             return 0;
-        } 
+        }
         else {
-            cout << "\nVoce decide entao ir embora pra casa antes que dois caras numa moto facam isso por voce. :D\n";
+            cout << "\n Voce decide entao ir embora pra casa antes que dois caras numa moto facam isso por voce. :D \n";
             exit(0);
         }
     }
-    else 
-    {
+    else {
         cout << "\n Voce ignorou sua fome e continuou seu caminho normalmente ;-; \n \n";
         exit(0);
-    };
+    }
 }
