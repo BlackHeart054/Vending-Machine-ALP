@@ -7,8 +7,8 @@
 #include <cstdlib>
 // Declaracao das variaveis que serao utilizadas no projeto, cada uma em um momento especifico
 using namespace std;
-int primeiraEscolha, segundaEscolha, terceiraEscolha, idCategoria, idProduto, valorProduto, itensCarrinho, opcaoFormaPagamento, opcaoPagamento;
-int quantidadeProduto = 0, valorSubtotal = 0, indiceLista = 0;
+int primeiraEscolha, segundaEscolha, terceiraEscolha, idCategoria, idProduto, valorProduto, itensCarrinho, opcaoFormaPagamento, opcaoPagamento, estoqueProduto;
+int quantidadeProduto = 0, valorSubtotal = 0, indiceLista = 0, pagamentoDinheiro = 0, valorDinheiro = 0, valorTotalSuportado = 2000;
 string nomeCategoria, nomeProduto;
 
 // Essa é a tela inicial da Vending Machine
@@ -53,22 +53,22 @@ void TelaRefrigerantes()
     cout << "|#|  PROJETO VENDING MACHINE  |##|````````|##|\n";
     cout << "|#|       REFIGERANTES        |##|Apenas  |##|\n";
     cout << "|#|---------------------------|##|Notas   |##|\n";
-    cout << "|#|       1-COCA-COLA         |##|Aceitas |##|\n";
+    cout << "|#| R$5   1-COCA-COLA ETQ: 10 |##|Aceitas |##|\n";
     cout << "|#|===========================|##|________|##|\n";
     cout << "|#|```````````````````````````|##############|\n";
-    cout << "|#|       2-PEPSI             |##############|\n";
+    cout << "|#| R$4   2-PEPSI     ETQ: 11 |##############|\n";
     cout << "|#|===========================|#|`````````|##|\n";
     cout << "|#|```````````````````````````|#| ,-----, |##|\n";
-    cout << "|#|       3-GUARANA ANTARTICA |#| |1|2|3| |##|\n";
+    cout << "|#| R$4   3-GUARANA ANTARTICA |#| |1|2|3| |##|\n";
     cout << "|#|===========================|#| |4|5|6| |##|\n";
     cout << "|#|```````````````````````````|#| |7|8|9| |##|\n";
-    cout << "|#|       4-TUBAINA           |#| '-----' |##|\n";
+    cout << "|#| R$3   4-TUBAINA   ETQ: 13 |#| '-----' |##|\n";
     cout << "|#|===========================|#|[=======]|##|\n";
     cout << "|#|```````````````````````````|#|  _   _  |##|\n";
-    cout << "|#|       5-FANTA LARANJA     |#| ||| ( ) |##|\n";
+    cout << "|#| R$5   5-FANTA LAR ETQ: 15 |#| ||| ( ) |##|\n";
     cout << "|#|===========================|#| |||  `  |##|\n";
     cout << "|#|```````````````````````````|#| |||  `  |##|\n";
-    cout << "|#|       6-FANTA UVA         |#|  ~      |##|\n";
+    cout << "|#| R$5   6-FANTA UVA ETQ: 14 |#|  ~      |##|\n";
     cout << "|#|===========================|#|_________|##|\n";
     cout << "|#|###########################|##############|\n";
     cout << "|#|||||||||||RETIRE||||||||||||####|||||||###|\n";
@@ -83,22 +83,22 @@ void TelaDoces()
     cout << "|#|  PROJETO VENDING MACHINE  |##|````````|##|\n";
     cout << "|#|          DOCES            |##|Apenas  |##|\n";
     cout << "|#|---------------------------|##|Notas   |##|\n";
-    cout << "|#|        1-SUFLAIR          |##|Aceitas |##|\n";
+    cout << "|#| R$6    1-SUFLAIR  ETQ: 10 |##|Aceitas |##|\n";
     cout << "|#|===========================|##|________|##|\n";
     cout << "|#|```````````````````````````|##############|\n";
-    cout << "|#|        2-BOMBOM           |##############|\n";
+    cout << "|#| R$1    2-BOMBOM   ETQ: 12 |##############|\n";
     cout << "|#|===========================|#|`````````|##|\n";
     cout << "|#|```````````````````````````|#| ,-----, |##|\n";
-    cout << "|#|        3-BARRA CEREAL     |#| |1|2|3| |##|\n";
+    cout << "|#| R$2    3-BARRA C. ETQ: 11 |#| |1|2|3| |##|\n";
     cout << "|#|===========================|#| |4|5|6| |##|\n";
     cout << "|#|```````````````````````````|#| |7|8|9| |##|\n";
-    cout << "|#|        4-SNIKERS          |#| '-----' |##|\n";
+    cout << "|#| R$4    4-SNIKERS  ETQ: 15 |#| '-----' |##|\n";
     cout << "|#|===========================|#|[=======]|##|\n";
     cout << "|#|```````````````````````````|#|  _   _  |##|\n";
-    cout << "|#|        5-PACOQUITA        |#| ||| ( ) |##|\n";
+    cout << "|#| R$1    5-PACOca   ETQ: 16 |#| ||| ( ) |##|\n";
     cout << "|#|===========================|#| |||  `  |##|\n";
     cout << "|#|```````````````````````````|#| |||  `  |##|\n";
-    cout << "|#|        6-SKITTLES         |#|  ~      |##|\n";
+    cout << "|#| R$6    6-SKITTLES ETQ: 17 |#|  ~      |##|\n";
     cout << "|#|===========================|#|_________|##|\n";
     cout << "|#|###########################|##############|\n";
     cout << "|#|||||||||||RETIRE||||||||||||####|||||||###|\n";
@@ -113,22 +113,22 @@ void TelaSalgadinhos()
     cout << "|#|  PROJETO VENDING MACHINE  |##|````````|##|\n";
     cout << "|#|       SALGADINHOS         |##|Apenas  |##|\n";
     cout << "|#|---------------------------|##|Notas   |##|\n";
-    cout << "|#|        1-CHEETOS          |##|Aceitas |##|\n";
+    cout << "|#| R$5    1-CHEETOS  ETQ: 11 |##|Aceitas |##|\n";
     cout << "|#|===========================|##|________|##|\n";
     cout << "|#|```````````````````````````|##############|\n";
-    cout << "|#|        2-FANDANGOS        |##############|\n";
+    cout << "|#| R$4   2-FANDANGOS ETQ: 19 |##############|\n";
     cout << "|#|===========================|#|`````````|##|\n";
     cout << "|#|```````````````````````````|#| ,-----, |##|\n";
-    cout << "|#|        3-DORITOS          |#| |1|2|3| |##|\n";
+    cout << "|#| R$8    3-DORITOS  ETQ: 18 |#| |1|2|3| |##|\n";
     cout << "|#|===========================|#| |4|5|6| |##|\n";
     cout << "|#|```````````````````````````|#| |7|8|9| |##|\n";
-    cout << "|#|        4-PRINGLES         |#| '-----' |##|\n";
+    cout << "|#| R$10   4-PRINGLES ETQ: 15 |#| '-----' |##|\n";
     cout << "|#|===========================|#|[=======]|##|\n";
     cout << "|#|```````````````````````````|#|  _   _  |##|\n";
-    cout << "|#|        5-TORCIDA          |#| ||| ( ) |##|\n";
+    cout << "|#| R$3    5-TORCIDA  ETQ: 16 |#| ||| ( ) |##|\n";
     cout << "|#|===========================|#| |||  `  |##|\n";
     cout << "|#|```````````````````````````|#| |||  `  |##|\n";
-    cout << "|#|        6-YOKITOS          |#|  ~      |##|\n";
+    cout << "|#| R$2    6-YOKITOS  ETQ: 12 |#|  ~      |##|\n";
     cout << "|#|===========================|#|_________|##|\n";
     cout << "|#|###########################|##############|\n";
     cout << "|#|||||||||||RETIRE||||||||||||####|||||||###|\n";
@@ -143,22 +143,22 @@ void TelaSucos()
     cout << "|#|  PROJETO VENDING MACHINE  |##|````````|##|\n";
     cout << "|#|          SUCOS            |##|Apenas  |##|\n";
     cout << "|#|---------------------------|##|Notas   |##|\n";
-    cout << "|#|        1-LARANJA          |##|Aceitas |##|\n";
+    cout << "|#| R$3    1-LARANJA  ETQ: 21 |##|Aceitas |##|\n";
     cout << "|#|===========================|##|________|##|\n";
     cout << "|#|```````````````````````````|##############|\n";
-    cout << "|#|        2-UVA              |##############|\n";
+    cout << "|#| R$2    2-UVA      ETQ: 24 |##############|\n";
     cout << "|#|===========================|#|`````````|##|\n";
     cout << "|#|```````````````````````````|#| ,-----, |##|\n";
-    cout << "|#|        3-MORANGO          |#| |1|2|3| |##|\n";
+    cout << "|#| R$4    3-MORANGO  ETQ: 18 |#| |1|2|3| |##|\n";
     cout << "|#|===========================|#| |4|5|6| |##|\n";
     cout << "|#|```````````````````````````|#| |7|8|9| |##|\n";
-    cout << "|#|        4-PESSEGO          |#| '-----' |##|\n";
+    cout << "|#| R$3    4-PESSEGO  ETQ: 14 |#| '-----' |##|\n";
     cout << "|#|===========================|#|[=======]|##|\n";
     cout << "|#|```````````````````````````|#|  _   _  |##|\n";
-    cout << "|#|        5-GOIABA           |#| ||| ( ) |##|\n";
+    cout << "|#| R$3    5-GOIABA   ETQ: 13 |#| ||| ( ) |##|\n";
     cout << "|#|===========================|#| |||  `  |##|\n";
     cout << "|#|```````````````````````````|#| |||  `  |##|\n";
-    cout << "|#|        6-ACEROLA          |#|  ~      |##|\n";
+    cout << "|#| R$2    6-ACEROLA  ETQ: 12 |#|  ~      |##|\n";
     cout << "|#|===========================|#|_________|##|\n";
     cout << "|#|###########################|##############|\n";
     cout << "|#|||||||||||RETIRE||||||||||||####|||||||###|\n";
@@ -173,22 +173,22 @@ void TelaAlcoolicos()
     cout << "|#|  PROJETO VENDING MACHINE  |##|````````|##|\n";
     cout << "|#|        ALCOOLICOS         |##|Apenas  |##|\n";
     cout << "|#|---------------------------|##|Notas   |##|\n";
-    cout << "|#|         1-COROTE          |##|Aceitas |##|\n";
+    cout << "|#| R$5     1-COROTE  ETQ: 24 |##|Aceitas |##|\n";
     cout << "|#|===========================|##|________|##|\n";
     cout << "|#|```````````````````````````|##############|\n";
-    cout << "|#|         2-SKOL            |##############|\n";
+    cout << "|#| R$6     2-SKOL    ETQ: 35 |##############|\n";
     cout << "|#|===========================|#|`````````|##|\n";
     cout << "|#|```````````````````````````|#| ,-----, |##|\n";
-    cout << "|#|         3-BRAHMA          |#| |1|2|3| |##|\n";
+    cout << "|#| R$6     3-BRAHMA  ETQ: 42 |#| |1|2|3| |##|\n";
     cout << "|#|===========================|#| |4|5|6| |##|\n";
     cout << "|#|```````````````````````````|#| |7|8|9| |##|\n";
-    cout << "|#|         4-AMSTEL          |#| '-----' |##|\n";
+    cout << "|#| R$7     4-AMSTEL  ETQ: 19 |#| '-----' |##|\n";
     cout << "|#|===========================|#|[=======]|##|\n";
     cout << "|#|```````````````````````````|#|  _   _  |##|\n";
-    cout << "|#|         5-HEINEKEN        |#| ||| ( ) |##|\n";
+    cout << "|#| R$10   5-HEINEKEN ETQ: 27 |#| ||| ( ) |##|\n";
     cout << "|#|===========================|#| |||  `  |##|\n";
     cout << "|#|```````````````````````````|#| |||  `  |##|\n";
-    cout << "|#|         6-PETRA           |#|  ~      |##|\n";
+    cout << "|#| R$8     6-PETRA   ETQ: 33 |#|  ~      |##|\n";
     cout << "|#|===========================|#|_________|##|\n";
     cout << "|#|###########################|##############|\n";
     cout << "|#|||||||||||RETIRE||||||||||||####|||||||###|\n";
@@ -203,22 +203,22 @@ void TelaChas()
     cout << "|#|  PROJETO VENDING MACHINE  |##|````````|##|\n";
     cout << "|#|           CHAS            |##|Apenas  |##|\n";
     cout << "|#|---------------------------|##|Notas   |##|\n";
-    cout << "|#|        1-CIDREIRA         |##|Aceitas |##|\n";
+    cout << "|#| R$2    1-CIDREIRA ETQ: 25 |##|Aceitas |##|\n";
     cout << "|#|===========================|##|________|##|\n";
     cout << "|#|```````````````````````````|##############|\n";
-    cout << "|#|        2-MATE             |##############|\n";
+    cout << "|#| R$3    2-MATE     ETQ: 8  |##############|\n";
     cout << "|#|===========================|#|`````````|##|\n";
     cout << "|#|```````````````````````````|#| ,-----, |##|\n";
-    cout << "|#|        3-HIBISCO          |#| |1|2|3| |##|\n";
+    cout << "|#| R$2    3-HIBISCO  ETQ: 14 |#| |1|2|3| |##|\n";
     cout << "|#|===========================|#| |4|5|6| |##|\n";
     cout << "|#|```````````````````````````|#| |7|8|9| |##|\n";
-    cout << "|#|        4-HORTELA          |#| '-----' |##|\n";
+    cout << "|#| R$1    4-HORTELA  ETQ: 11 |#| '-----' |##|\n";
     cout << "|#|===========================|#|[=======]|##|\n";
     cout << "|#|```````````````````````````|#|  _   _  |##|\n";
-    cout << "|#|        5-CAMOMILA         |#| ||| ( ) |##|\n";
+    cout << "|#| R$2    5-CAMOMILA ETQ: 13 |#| ||| ( ) |##|\n";
     cout << "|#|===========================|#| |||  `  |##|\n";
     cout << "|#|```````````````````````````|#| |||  `  |##|\n";
-    cout << "|#|        6-BOLDO            |#|  ~      |##|\n";
+    cout << "|#| R$3    6-BOLDO    ETQ: 15 |#|  ~      |##|\n";
     cout << "|#|===========================|#|_________|##|\n";
     cout << "|#|###########################|##############|\n";
     cout << "|#|||||||||||RETIRE||||||||||||####|||||||###|\n";
@@ -247,6 +247,7 @@ int TelaEscolhaCategoria() {
         break;
     case 6:
         TelaChas();
+        break;
     default:
         TelaRefrigerantes();
         break;
@@ -463,33 +464,70 @@ void NomesCategoriasProdutos() {
 
 // Esse For esta responsavel por quando o usuario adicionar mais itens no carrinho, ele escrever qual produto, categoria, valor e quantidade uma linha após a outra; 
 void ListaSubtotalProdutos() {
-    NomesCategoriasProdutos();
     for (int i = 0; i < indiceLista + 1; i++) {
-        cout << "| " << nomeCategoria << ": " << quantidadeProduto << "x " << nomeProduto << " R$" << valorProduto << " |\n";
+        cout << "| " << nomeCategoria << ": " << quantidadeProduto << "x R$ " << valorProduto << " " << nomeProduto << " |\n";
     }
 }
 
 // Esse void apenas existe para quando o usuario selecionar a opção, levar para frases diferentes
 void Pagamento() {
     switch (opcaoFormaPagamento) {
-        case 1:
-            cout << "\n'A rua esta movimentada, melhor inserir logo o cartao'\n";
-            break;
-        case 2:
-            cout << "\n'A rua esta movimentada, melhor inserir logo o cartao'\n";
-            break;
-        case 3:
-            cout << "\n'Melhor escanear logo o QR Code, eh arriscado bobear com um aparelho desse'\n";
-            break;
-        case 4:
-            cout << "\n'Melhor inserir logo o dinheiro, estou morrendo de fome'\n";
-            break;
-        default:
-            cout << "\n'A rua esta movimentada, melhor inserir logo o cartao'\n";
-            break;
+    case 1:
+        cout << "\n'A rua esta movimentada, melhor inserir logo o cartao'\n";
+        break;
+    case 2:
+        cout << "\n'A rua esta movimentada, melhor inserir logo o cartao'\n";
+        break;
+    case 3:
+        cout << "\n'Melhor escanear logo o QR Code, eh arriscado bobear com um aparelho desse'\n";
+        break;
+    case 4:
+        cout << "\n'Melhor inserir logo o dinheiro, estou morrendo de fome'\n";
+        do {
+            cout << "\n Quanto devo inserir? \n"
+                "\n 1. R$ 2"
+                "\n 2. R$ 5"
+                "\n 3. R$ 10"
+                "\n 4. R$ 20"
+                "\n 5. R$ 50"
+                "\n 6. R$ 100 \n";
+            cin >> pagamentoDinheiro;
+            switch (pagamentoDinheiro) {
+            case 1:
+                valorDinheiro = 2;
+                break;
+            case 2:
+                valorDinheiro = 5;
+                break;
+            case 3:
+                valorDinheiro = 10;
+                break;
+            case 4:
+                valorDinheiro = 20;
+                break;
+            case 5:
+                valorDinheiro = 50;
+                break;
+            case 6:
+                valorDinheiro = 100;
+                break;
+            default:
+                valorDinheiro = 2;
+                break;
+            }
+            if (valorDinheiro < valorSubtotal) {
+                cout << "\n Valor insuficiente \n";
+                valorDinheiro = 0;
+            }
+        } while (valorDinheiro < valorSubtotal);
+        cout << "\n Seu troco eh R$ " << (valorDinheiro - valorSubtotal) << endl;
+        break;
+    default:
+        cout << "\n'A rua esta movimentada, melhor inserir logo o cartao'\n";
+        break;
     }
-        
 }
+
 
 // Essa tela é a de administrador, onde é possivel adicionar mais produtos caso necessario
 void TelaAdministrador() {
@@ -519,7 +557,10 @@ int TelaSubtotal() {
     cout << " ____________________________________________ \n";
     cout << "|                 SUBTOTAL                   |\n";
     cout << "|--------------------------------------------|\n";
-    ListaSubtotalProdutos();
+    for (int i = 0; i < indiceLista + 1; i++) {
+        cout << "| " << nomeCategoria << ": " << quantidadeProduto << "x R$ " << valorProduto << " " << nomeProduto
+            << " |\n";
+    }
     cout << "|--------------------------------------------|\n";
     cout << "| O valor total da sua compra foi de: R$ " << valorSubtotal << "  | \n";
     cout << "'--------------------------------------------'\n";
@@ -529,64 +570,64 @@ int TelaSubtotal() {
 // Tela responsavel por mostrar os itens que podem ser adicionados a maquina de vendas
 void AdicionarProdutosMaquina() {
     switch (idCategoria) {
-    case 1:
-        cout << " _________________________________________________________________ \n";
-        cout << "|                                                                 |\n";
-        cout << "|                            REFRIGERANTES                        |\n";
-        cout << "|-----------------------------------------------------------------|\n";
-        cout << "| 1 - COCA-COLA           2 - PEPSI          3 - GUARANA ANTARTICA|\n";
-        cout << "| 4 - TUBAINA             5 - FANTA LARANJA  6 - FANTA UVA        |\n";
-        cout << "|-----------------------------------------------------------------|\n";
-        break;
-    case 2:
-        cout << " _________________________________________________________________ \n";
-        cout << "|                                                                 |\n";
-        cout << "|                            DOCES                                |\n";
-        cout << "|-----------------------------------------------------------------|\n";
-        cout << "| 1 - SUFLAIR            2 - BOMBOM         3 - BARRA CEREAL      |\n";
-        cout << "| 4 - SNIKERS            5 - PACOQUITA      6 - SKITTLES          |\n";
-        cout << "|-----------------------------------------------------------------|\n";
-        break;
-    case 3:
-        nomeCategoria = "SALGADINHOS";
-        cout << " _________________________________________________________________ \n";
-        cout << "|                                                                 |\n";
-        cout << "|                            SALGADINHOS                          |\n";
-        cout << "|-----------------------------------------------------------------|\n";
-        cout << "| 1 - CHEETOS            2 - FANDANGOS      3 - DORITOS           |\n";
-        cout << "| 4 - PRINGLES           5 - TORCIDA        6 - YOKITOS           |\n";
-        cout << "|-----------------------------------------------------------------|\n";
-        break;
-    case 4:
-        nomeCategoria = "SUCOS";
-        cout << " _________________________________________________________________ \n";
-        cout << "|                                                                 |\n";
-        cout << "|                            SUCOS                                |\n";
-        cout << "|-----------------------------------------------------------------|\n";
-        cout << "| 1 - LARANJA            2 - UVA            3 - MORANGO           |\n";
-        cout << "| 4 - PESSEGO            5 - GOIABA         6 - ACEROLA           |\n";
-        cout << "|-----------------------------------------------------------------|\n";
-        break;
-    case 5:
-        nomeCategoria = "ALCOOLICOS";
-        cout << " _________________________________________________________________ \n";
-        cout << "|                                                                 |\n";
-        cout << "|                            ALCOOLICOS                           |\n";
-        cout << "|-----------------------------------------------------------------|\n";
-        cout << "| 1 - COROTE             2 - SKOL           3 - BRAHMA            |\n";
-        cout << "| 4 - AMSTEL             5 - HEINEKEN       6 - PETRA             |\n";
-        cout << "|-----------------------------------------------------------------|\n";
-        break;
-    case 6:
-        nomeCategoria = "CHAS";
-        cout << " _________________________________________________________________ \n";
-        cout << "|                                                                 |\n";
-        cout << "|                            CHAS                                 |\n";
-        cout << "|-----------------------------------------------------------------|\n";
-        cout << "| 1 - CIDEIRA            2 - MATE           3 - HIBISCO           |\n";
-        cout << "| 4 - HORTELA            5 - CAMOMILA       6 - BOLDO             |\n";
-        cout << "|-----------------------------------------------------------------|\n";
-        break;
+        case 1:
+            cout << " _________________________________________________________________ \n";
+            cout << "|                                                                 |\n";
+            cout << "|                            REFRIGERANTES                        |\n";
+            cout << "|-----------------------------------------------------------------|\n";
+            cout << "| 1 - COCA-COLA          2 - PEPSI          3 - GUARANA ANTARTICA |\n";
+            cout << "| 4 - TUBAINA            5 - FANTA LARANJA  6 - FANTA UVA         |\n";
+            cout << "|-----------------------------------------------------------------|\n";
+            break;
+        case 2:
+            cout << " _________________________________________________________________ \n";
+            cout << "|                                                                 |\n";
+            cout << "|                            DOCES                                |\n";
+            cout << "|-----------------------------------------------------------------|\n";
+            cout << "| 1 - SUFLAIR            2 - BOMBOM         3 - BARRA CEREAL      |\n";
+            cout << "| 4 - SNIKERS            5 - PACOQUITA      6 - SKITTLES          |\n";
+            cout << "|-----------------------------------------------------------------|\n";
+            break;
+        case 3:
+            nomeCategoria = "SALGADINHOS";
+            cout << " _________________________________________________________________ \n";
+            cout << "|                                                                 |\n";
+            cout << "|                            SALGADINHOS                          |\n";
+            cout << "|-----------------------------------------------------------------|\n";
+            cout << "| 1 - CHEETOS            2 - FANDANGOS      3 - DORITOS           |\n";
+            cout << "| 4 - PRINGLES           5 - TORCIDA        6 - YOKITOS           |\n";
+            cout << "|-----------------------------------------------------------------|\n";
+            break;
+        case 4:
+            nomeCategoria = "SUCOS";
+            cout << " _________________________________________________________________ \n";
+            cout << "|                                                                 |\n";
+            cout << "|                            SUCOS                                |\n";
+            cout << "|-----------------------------------------------------------------|\n";
+            cout << "| 1 - LARANJA            2 - UVA            3 - MORANGO           |\n";
+            cout << "| 4 - PESSEGO            5 - GOIABA         6 - ACEROLA           |\n";
+            cout << "|-----------------------------------------------------------------|\n";
+            break;
+        case 5:
+            nomeCategoria = "ALCOOLICOS";
+            cout << " _________________________________________________________________ \n";
+            cout << "|                                                                 |\n";
+            cout << "|                            ALCOOLICOS                           |\n";
+            cout << "|-----------------------------------------------------------------|\n";
+            cout << "| 1 - COROTE             2 - SKOL           3 - BRAHMA            |\n";
+            cout << "| 4 - AMSTEL             5 - HEINEKEN       6 - PETRA             |\n";
+            cout << "|-----------------------------------------------------------------|\n";
+            break;
+        case 6:
+            nomeCategoria = "CHAS";
+            cout << " _________________________________________________________________ \n";
+            cout << "|                                                                 |\n";
+            cout << "|                            CHAS                                 |\n";
+            cout << "|-----------------------------------------------------------------|\n";
+            cout << "| 1 - CIDEIRA            2 - MATE           3 - HIBISCO           |\n";
+            cout << "| 4 - HORTELA            5 - CAMOMILA       6 - BOLDO             |\n";
+            cout << "|-----------------------------------------------------------------|\n";
+            break;
     };
 }
 
@@ -596,7 +637,10 @@ void ConfirmarAdicaoMaquina() {
     cout << "|                                                                 |\n";
     cout << "|                DESEJA ADICIONAR ESSES ITENS?                    |\n";
     cout << "|-----------------------------------------------------------------|\n";
-    ListaSubtotalProdutos();
+    cout << "| " << nomeCategoria << ": " << quantidadeProduto << "x R$ " << valorProduto << " " << nomeProduto << " |\n";
+    cout << "|-----------------------------------------------------------------|\n";
+    cout << "|                TOTAL FATURADO HOJE: R$ " << valorSubtotal <<     " |\n";
+    cout << "|                TOTAL ARMAZENAMENTO DISPONIVEL: R$ " << valorSubtotal - valorTotalSuportado<< " |\n";
     cout << "|-----------------------------------------------------------------|\n";
 }
 
@@ -623,8 +667,9 @@ int main() {
             cin >> idProduto;
             cout << "\n E obviamente, a quantidade do produto desejado \n";
             cin >> quantidadeProduto;
+            NomesCategoriasProdutos();
             cout << "\n Logo apos, o sistema da vending machine leva a uma tela de subtotal \n ";
-            valorSubtotal += valorProduto;
+            valorSubtotal += valorProduto ;
             TelaSubtotal();
             cout << "\n Deseja adicionar mais itens a sacola? (1 - SIM | 2 - NAO) \n";
             cin >> segundaEscolha;
@@ -663,9 +708,14 @@ int main() {
             cout << "\n Por fim, chega na tela onde eh possivel adicionar a quantia de itens na maquina \n";
             cout << "\n Nesse momento entao o homem vira e lhe diz: 'Nao se preocupe, os itens chegarao em breve e serao repostos! \n";
             cout << "\n Voce decide entao colocar ", cin >> quantidadeProduto;
-            cin >> quantidadeProduto;
             ConfirmarAdicaoMaquina();
-            
+            cout << "\n A noite ja esta chegando e voce ainda esta brincando com essa maquina...\n";
+            cout << "\n 'Melhor ir embora para casa, outro dia eu volto' \n";
+            system("cls");
+            cout << "\n No outro dia voce passa novamente pelo local onde se divertiu tanto ontem, \n";
+            cout << "\n contudo, a maquina nao estava mais la... \n";
+            cout << "\n Voce cogita perguntar para alguem o que aconteceu, mas ao olhar atentamente. Percebe que \n";
+            cout << "\n simplesmente nao cabe nada naquele local. Confuso, voce volta para casa e nunca mais toca nesse assunto... \n";
             return 0;
         }
         else {
